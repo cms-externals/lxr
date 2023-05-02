@@ -423,6 +423,8 @@ sub targetexpand {
 	$ret =~ s/&/&amp;/g;
 	$ret =~ s/</&lt;/g;
 	$ret =~ s/>/&gt;/g;
+        $ret =~ s/\"/&quote;/g;
+        $ret =~ s/[%]22/&quote;/g;
 	return $ret;
 }
 
@@ -475,6 +477,8 @@ sub captionexpand {
 	$ret =~ s/&/&amp;/g;
 	$ret =~ s/</&lt;/g;
 	$ret =~ s/>/&gt;/g;
+        $ret =~ s/\"/&quote;/g;
+        $ret =~ s/[%]22/&quote;/g;
 	return $ret;
 }
 
@@ -596,6 +600,8 @@ sub titleexpand {
 	$ret =~ s/&/&amp;/g;
 	$ret =~ s/</&lt;/g;
 	$ret =~ s/>/&gt;/g;
+        $ret =~ s/\"/&quote;/g;
+        $ret =~ s/[%]22/&quote;/g;
 	return $ret;
 }
 
@@ -985,6 +991,8 @@ sub urlexpand {
 	# string and file if defined to avoid retyping it after a
 	# version change for instance.
 		$args = &urlargs('-' ne $templ ? &nonvarargs() : ());
+                $args =~ s/\"/&quote;/g;
+                $args =~ s/[%]22/&quote;/g;
 	} else {
 		$args = &urlargs();
 	}
@@ -992,6 +1000,7 @@ sub urlexpand {
 	while ($args =~ m![?&;]((?:\~|\w)+)=(.*?)(?=[&;]|$)!g) {
 		my $var = $1;
 		my $val = $2;
+                
 		# Avoid double HTTP-encoding (these values are transmitted
 		# through <input> elements).
 		$var =~ s/\%([\da-f][\da-f])/pack("C", hex($1))/gie;
@@ -1756,6 +1765,8 @@ sub makeheader {
 									; $ret =~ s/&/&amp;/g
 									; $ret =~ s/</&lt;/g
 									; $ret =~ s/>/&gt;/g
+                                                                        ; $ret =~ s/\"/&quote;/g
+                                                                        ; $ret =~ s/[%]22/&quote;/g
 									; return $ret
 									}
 			,	'LXRversion' => sub { "2.3.6" }
@@ -1830,6 +1841,8 @@ sub makefooter {
 									; $ret =~ s/&/&amp;/g
 									; $ret =~ s/</&lt;/g
 									; $ret =~ s/>/&gt;/g
+                                                                        ; $ret =~ s/\"/&quote;/g
+                                                                        ; $ret =~ s/[%]22/&quote;/g
 									; return $ret
 									}
 			,	'LXRversion' => sub { "2.3.6" }
