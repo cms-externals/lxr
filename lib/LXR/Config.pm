@@ -246,6 +246,7 @@ sub _initialize {
 	$host =~ s!^//!http://!;		# allow a shortened form in genxref
 	$host =~ s!(//[^:/]+(:\d+)?).*!$1!;	# only host name and port
 	$host =~ s!^http://([^/]*):443!https://$1!;
+	$host =~ s!^.+://!//!;
 
 	unless ($script_path) {
 		$script_path = $ENV{'SCRIPT_NAME'};
@@ -406,7 +407,7 @@ CANDIDATE: foreach my $config (@config[1..$#config]) {
 		if (scalar(@hostnames)>0) {
 			foreach my $rt (@hostnames) {
 				$rt =~ s!/*$!!;		# remove trailing /
-				$rt =~ s!^//!http://!; # allow for a shortened form
+				#$rt =~ s!^//!http://!; # allow for a shortened form
 		# To allow simultaneous Apache and lighttpd operation
 		# on 2 different ports, remove port for identification
 				$rt =~ s/:\d+$//;

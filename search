@@ -564,8 +564,8 @@ sub search {
 	print expandtemplate
 		( $templ
 		,	( 'variables'			=> \&varexpand
-			, 'searchtext'			=> sub { $_ = $searchtext; s/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g; return $_; }
-			, 'searchtext_escaped'	=> sub { $_ = $searchtext; s/&/&amp;/g; s/\"/&quot;/g; s/</&lt;/g; s/>/&gt;/g; return $_; }
+			, 'searchtext'			=> sub { $_ = $searchtext; s/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g; s/\"/&quote;/g; return $_; }
+			, 'searchtext_escaped'	=> sub { $_ = $searchtext; s/&/&amp;/g; s/\"/&quote;/g; s/</&lt;/g; s/>/&gt;/g; return $_; }
 			, 'filetext_escaped'	=> sub { $_ = $filetext; s/\"/&quot;/g; return $_; }
 			, 'advancedchecked'		=> sub { $advanced ? 'checked' : '' }
 			, 'casesensitivechecked'=> sub { $casesensitive ? 'checked' : '' }

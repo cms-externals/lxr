@@ -165,6 +165,8 @@ sub warning {
 		};
 		$msg =~ s/</&lt;/g;
 		$msg =~ s/>/&gt;/g;
+                $msg =~ s/"/&quote;/g;
+                $msg =~ s/[%]22/&quote;/g;
 		$msg =~ s/\n/\n<br>/g;
 		print	'<h4 class="warning"><p class="headline">** Warning **</p>'
 				. $msg
@@ -236,6 +238,8 @@ sub fatal {
 		};
 		$msg =~ s/</&lt;/g;
 		$msg =~ s/>/&gt;/g;
+                $msg =~ s/"/&quote;/g;
+                $msg =~ s/[%]22/&quote;/g;
 		$msg =~ s/\n/\n<br>/g;
 		print	'<h4 class="fatal"><p class="headline">** Fatal **</p>'
 				. $msg
@@ -534,6 +538,8 @@ sub fileref {
 	$desc =~ s/&/&amp;/g;
 	$desc =~ s/</&lt;/g;
 	$desc =~ s/>/&gt;/g;
+        $desc =~ s/"/&quote;/g;
+        $desc =~ s/[%]22/&quote;/g;
 
 	$line = ('0' x (4 - length($line))) . $line;
 
@@ -608,6 +614,8 @@ sub diffref {
 	$desc =~ s/&/&amp;/g;
 	$desc =~ s/</&lt;/g;
 	$desc =~ s/>/&gt;/g;
+        $desc =~ s/"/&quote;/g;
+        $desc =~ s/[%]22/&quote;/g;
 	return	( "<a class='$css' href=\""
 				. $config->{'virtroot'}
 				. 'diff'
@@ -672,6 +680,8 @@ sub idref {
 	$desc =~ s/&/&amp;/g;
 	$desc =~ s/</&lt;/g;
 	$desc =~ s/>/&gt;/g;
+        $desc =~ s/"/&quote;/g;
+        $desc =~ s/[%]22/&quote;/g;
 	return	( "<a class='$css' href=\""
 				. $config->{'virtroot'}
 				. 'ident'
